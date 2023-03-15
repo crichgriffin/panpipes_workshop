@@ -187,7 +187,7 @@ score_genes: MarkersNeutro
 
 # likely a combination of metadatacolumns and demultiplex_metadatacols
 plotqc_grouping_var: sample_id
-plotqc_rna_metrics: doublet_scores,pct_counts_mitochondrial,pct_counts_ribosomal,pct_counts_haemoglobin,pct_counts_ig
+plotqc_rna_metrics: doublet_scores,pct_counts_mt,pct_counts_rp,pct_counts_hb,pct_counts_ig
 
 
 
