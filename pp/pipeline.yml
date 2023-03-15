@@ -1,4 +1,4 @@
-# Pipeline pipeline_integration.py configuration file
+# Pipeline pipeline_preprocess.py configuration file
 # ==============================================
 
 # compute resource options
@@ -21,8 +21,8 @@ condaenv:
 # Start
 # --------------------------
 # either one that exists already with
-#tenx_dir:
-#create_anndata: False
+
+
 sample_prefix: 
 unfiltered_obj: 
 # if running this on prefiltered datat then
