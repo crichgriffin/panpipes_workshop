@@ -23,8 +23,8 @@ condaenv:
 # either one that exists already with
 
 
-sample_prefix: 
-unfiltered_obj: 
+sample_prefix: 10k_PBMC_TBNK_connect
+unfiltered_obj: "../qc_mm/10k_PBMC_TBNK_connect_unfilt.h5mu"
 # if running this on prefiltered datat then
 #1. set unfiltered obj (above) to blank
 #2. rename your filtered file to match, the format PARAMS['sample_prefix'] + '.h5mu'
@@ -38,9 +38,9 @@ unfiltered_obj:
 output_logged_mudata:
 
 modalities:
-  rna:  
-  prot: 
-  rep: 
+  rna:  True
+  prot: True
+  rep: True
   atac: 
 
 # Filtering
@@ -85,19 +85,19 @@ filtering:
     ## obs filtering: cell level filtering here
     obs:
       min:
-        n_genes_by_counts: 
+        n_genes_by_counts: 500
       max:
-        total_counts: 
+        total_counts: 50000
         n_genes_by_counts: 
         # percent filtering: 
         # this should be a value between 0 and 100%. 
         # leave blank or set to 100 to avoid filtering for any of these param
-        pct_counts_mt: 
-        pct_counts_rt:
+        pct_counts_mt: 25
+        pct_counts_rp: 
         # either one score for all samples e.g. 0.25, 
         # or a csv file with two columns sample_id, and cut off
         # less than
-        doublet_scores:
+        doublet_scores: 0.25
         #  if you wanted to be more precise i.e. apply a different srublet threshold per sample
         # you could add a new column to the mudata['rna'].obs with True False values, and list
         # that column under bool:, you can do this for any modality
@@ -133,7 +133,7 @@ filtering:
 # Intersecting barcodes
 # ----------------------
 # set a comma separated list where you want to keep only the intersection of barcodes. e.g. rna,prot 
-intersect_mods: 
+intersect_mods: rna,prot
 
 
 # ------------
@@ -176,7 +176,7 @@ hvg:
   exclude_file: /gpfs3/well/cartography/users/zsj686/non_cart_projects/005-multimodal_scpipelines/src/sc_pipelines_muon_dev/resources/qc_genelist_1.0.csv
   exclude: exclude # this is the variable that defines the genes to be excluded in the above file
   flavor: seurat_v3 # "seurat", "cell_ranger", "seurat_v3"
-  n_top_genes: 2000
+  n_top_genes: 3500
   min_mean:
   max_mean:
   min_disp:
@@ -229,16 +229,16 @@ prot:
 
   # DSB parameters:
    # you must specify the path to the background h5mu created in pipeline qc_mm in order to run dsb.
-  background_obj:
+  background_obj: "../qc_mm/10k_PBMC_TBNK_connect_bg.h5mu"
  # quantile clipping, even with normalisation, 
   # some cells get extreme outliers which can be clipped as discussed https://github.com/niaid/dsb
   # maximum value will be set at the value of the 99.5% quantile, applied per feature
   # note that this feature is in the default muon mu.pp.dsb code, but manually implemented in this code.
-  quantile_clipping: True
+  quantile_clipping: False
   
   # which normalisation method to be store in the X slot. If you choose to run more than one normalisation method,
   # which one to you want to store in the X slot, if not specified 'dsb' is the default when run.
-  store_as_X: 
+  store_as_X: dsb
 
   # do you want to save the prot normalised assay additionally as a txt file:
   save_norm_prot_mtx: False
