@@ -102,6 +102,7 @@ filtering:
         # you could add a new column to the mudata['rna'].obs with True False values, and list
         # that column under bool:, you can do this for any modality
       bool:
+        predicted_doublets: False
     ## var filtering: (feature) gene level filtering here
     var:
       min:
